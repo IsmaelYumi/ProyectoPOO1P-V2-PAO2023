@@ -1,6 +1,7 @@
 package com.example;
 
 import java.security.SecureRandom;
+import java.util.Arrays;
 
 public class Articulo {
     private String titulo;
@@ -63,6 +64,11 @@ public class Articulo {
             codigo.append(CARACTERES.charAt(indiceAleatorio));
         }
         return codigo.toString();
+    }
+    @Override
+    public String toString() {
+        return "Articulo [titulo=" + titulo + ", codigo=" + codigo + ", resumen=" + resumen + ", contenido=" + contenido
+                + ", autor=" + autor + ", palabras_c=" + Arrays.toString(palabras_c) + "]";
     }
     
 

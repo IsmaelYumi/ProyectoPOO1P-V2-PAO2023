@@ -58,7 +58,7 @@ public class Autor {
             System.err.println("Error al leer el archivo: " + e.getMessage());
         }
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/java/com/archivos/Revision.txt", true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/java/com/archivos/Seguimiento.txt", true))) {
             String contenido=this.getNombre()+","+articulo.getCodigo()+","+revisor+"\n";
             writer.write(contenido);
             System.out.println("Articulo puesto en revision");

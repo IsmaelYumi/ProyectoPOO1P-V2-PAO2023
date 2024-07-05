@@ -3,13 +3,16 @@ import com.example.Usuario;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 
 public class Main {
     private static ArrayList<Usuario> Usuarios =new ArrayList<>();
-    private static ArrayList<Articulo> Articulos=new AarrayList<>();
+    private static ArrayList<Articulo> Articulos=new ArrayList<>();
+    public static Usuario usuario_act=null;
     public static void main(String[] args) {
         Scanner sc=new Scanner(System.in);
         boolean verificar =true;
@@ -25,13 +28,13 @@ public class Main {
         switch (opc) {
             case 1:
             Boolean ingreso=false;
-            Usuario usuario_act=null;
+            
                     System.out.println("Ingrese su usuario");
                     String usu=sc.next();
                     System.out.println("Ingrese su contrasenia");
                     String contra=sc.next();
                     for(Usuario us: Usuarios){
-                        if (us.getUser()==usu && us.getContrasenia()==contra){
+                        if (us.getUser().equals(usu) && us.getContrasenia().equals(contra)){
                             usuario_act=us;
                             ingreso=true;
                             break;    
@@ -40,12 +43,10 @@ public class Main {
                     if(ingreso==true){
                         System.out.println("Bienvenido al sistema");
                         if(usuario_act instanceof Editor){
-
-
-
                         }
                         if(usuario_act instanceof Revisor){
-                            String rutaArchivo = "src/main/java/com/archivos/Usuarios.txt";
+                            Revisor revisor= (Revisor) usuario_act;
+                            String rutaArchivo = "src/main/java/com/archivos/Revision.txt";
                             try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
                                 String linea;
                                 while ((linea = br.readLine()) != null) {
@@ -60,15 +61,34 @@ public class Main {
                             }
                             System.out.println("Escriba el codigo del articulo que quiera tener detalle: ");
                             String codigo=sc.next();
+                            Articulo art_seleccionado=null;
                             for(Articulo ac: Articulos){
                                 if(ac.getCodigo()==codigo){
                                     System.out.println(ac);
+                                    art_seleccionado=ac;
                                 }
                                 
                             }
                             System.out.println("Deseas emitir comentarios respeco al articulo?: ");
                             String opcion=sc.next();
-                            if(opcion.equalsIgnoreCase("si"));
+                            if(opcion.equalsIgnoreCase("si")){
+                                System.out.println("Ingrese su comentario");
+                                String comentarios= sc.next();
+                                System.out.println("Desea enviar a revision?, presione s para confirmar , n para no subir");
+                                String opcionSubir=sc.next();
+                                if(opcionSubir=="s"){
+                                    revisor.SubirRevision(art_seleccionado, comentarios);      
+                                }else{
+                                    System.out.println("Saliendo del sistema");
+
+                                }
+                                
+
+                            }else{
+                                System.out.println("Saliendo del sistema");
+
+                            }
+                            
                             
 
 
@@ -105,7 +125,7 @@ public class Main {
                art.setPalabras_c(palabras);
               System.out.println("subiendo a revision..");
               ar.SubirDoc(art);
-              Articulos.add(ar);
+              Articulos.add(art);
                 break;
             default:
                 break;
@@ -122,11 +142,11 @@ public class Main {
             while ((linea = br.readLine()) != null) {
                 String[] datos=linea.split(",");
                 if(datos[2].charAt(0)=='R'){
-                    Usuario usu= new Revisor(datos[0], datos[1],datos[2].charAt(0), datos[3], datos[4], datos[5],Integer.parseInt(datos[6]));
+                    Usuario usu= new Revisor(datos[0].trim(), datos[1].trim(),datos[2].charAt(0), datos[3], datos[4], datos[5],Integer.parseInt(datos[6]));
                     Usuarios.add(usu);
                 }
                 if(datos[2].charAt(0)=='E'){
-                    Usuario usu= new Editor(datos[0], datos[1],datos[2].charAt(0), datos[3], datos[4], datos[5]);
+                    Usuario usu= new Editor(datos[0].trim(), datos[1].trim(),datos[2].charAt(0), datos[3], datos[4], datos[5]);
                     Usuarios.add(usu);
                 }
             }
