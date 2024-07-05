@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class Main {
     private static ArrayList<Usuario> Usuarios =new ArrayList<>();
-
+    private static ArrayList<Articulo> Articulos=new AarrayList<>();
     public static void main(String[] args) {
         Scanner sc=new Scanner(System.in);
         boolean verificar =true;
@@ -30,7 +30,6 @@ public class Main {
                     String usu=sc.next();
                     System.out.println("Ingrese su contrasenia");
                     String contra=sc.next();
-                    
                     for(Usuario us: Usuarios){
                         if (us.getUser()==usu && us.getContrasenia()==contra){
                             usuario_act=us;
@@ -44,7 +43,6 @@ public class Main {
 
 
 
-
                         }
                         if(usuario_act instanceof Revisor){
                             String rutaArchivo = "src/main/java/com/archivos/Usuarios.txt";
@@ -54,13 +52,25 @@ public class Main {
                                     String[] info=linea.split(",");
                                     if(info[2]==usuario_act.getUser()){
                                         System.out.println("tienes revisiones");
+                                        System.out.println(linea);
                                     }
+
                                 }
-
                             }catch(IOException a){
-
-
                             }
+                            System.out.println("Escriba el codigo del articulo que quiera tener detalle: ");
+                            String codigo=sc.next();
+                            for(Articulo ac: Articulos){
+                                if(ac.getCodigo()==codigo){
+                                    System.out.println(ac);
+                                }
+                                
+                            }
+                            System.out.println("Deseas emitir comentarios respeco al articulo?: ");
+                            String opcion=sc.next();
+                            if(opcion.equalsIgnoreCase("si"));
+                            
+
 
 
                         }
@@ -95,6 +105,7 @@ public class Main {
                art.setPalabras_c(palabras);
               System.out.println("subiendo a revision..");
               ar.SubirDoc(art);
+              Articulos.add(ar);
                 break;
             default:
                 break;
