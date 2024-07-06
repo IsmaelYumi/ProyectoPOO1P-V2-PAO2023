@@ -41,10 +41,7 @@ public class Main {
                     if(ingreso==true){
                         System.out.println("Bienvenido al sistema");
                         if(usuario_act instanceof Editor){
-
-
-
-
+                            Editor editor= (Editor) usuario_act;
                         }
                         if(usuario_act instanceof Revisor){
                             String rutaArchivo = "src/main/java/com/archivos/Usuarios.txt";
