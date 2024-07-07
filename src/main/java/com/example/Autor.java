@@ -57,17 +57,37 @@ public class Autor {
         } catch (IOException e) {
             System.err.println("Error al leer el archivo: " + e.getMessage());
         }
-
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/java/com/archivos/Revision.txt", true))) {
+/*Subir articulo a revision*/
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/java/com/archivos/Seguimiento.txt", true))) {
             String contenido=this.getNombre()+","+articulo.getCodigo()+","+revisor+"\n";
             writer.write(contenido);
             System.out.println("Articulo puesto en revision");
+         
         
     }catch(Exception e){
         System.out.println("Articulo no subido");
-
+/*subir info de autor*/
+    } try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/java/com/archivos/Autor.txt", true))) {
+            String contenido=this.toString()+"\n";
+            writer.write(contenido);
+          
+        
+    }catch(Exception e){
+        
+    }
+    /*Subir articulo*/
+    try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/java/com/archivos/Articulos.txt", true))) {
+            String contenido=articulo.toString()+"\n";
+            writer.write(contenido);
+          
+    }catch(Exception e){
+        
     }
 }
+    @Override
+    public String toString() {
+        return  nombre +","+ apellido+"," + institucion + "," + Area_investigacion + "," + codigo ;
+    }
 
 
 }

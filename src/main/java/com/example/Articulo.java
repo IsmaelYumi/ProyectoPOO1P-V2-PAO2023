@@ -1,6 +1,7 @@
 package com.example;
 
 import java.security.SecureRandom;
+import java.util.Arrays;
 
 public class Articulo {
     private String titulo;
@@ -64,7 +65,9 @@ public class Articulo {
         }
         return codigo.toString();
     }
-    
-
-    
+    @Override
+    public String toString() {
+        return titulo + "," + codigo + "," + resumen + "," + contenido
+                + ", autor=" + autor + ", palabras_c=" + Arrays.toString(palabras_c) + "]";
+    } 
 }

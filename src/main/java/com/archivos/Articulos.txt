@@ -1,0 +1,1 @@
+Articulo [titulo=hola, codigo=TIIcwa, resumen=valer vrga, contenido=verga, autor=jsj,yumi,bicho,mana,0, palabras_c=[picha]]

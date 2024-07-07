@@ -1,1 +1,2 @@
 jcarlos,jm234,R,Juancarlos,Mera,Investigacion,12
+jkeditor,qwerty,E,Jhonny,gonzalo,bicho-mania
